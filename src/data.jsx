@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const PAgination = () => {
@@ -14,8 +15,9 @@ const PAgination = () => {
   const [page,setPagu] = useState(0);
   const [limit,steLimit] = useState('');
 
+  const [ searchBar , setsearchbar ] = useState('');
+  // const navigate = useNavigate();
   const callApi = async(number)=>{
-    
     try 
     {
       
@@ -48,7 +50,27 @@ const PAgination = () => {
         console.error(error);
       }
   }
-
+  const searchAPi = async(number)=>{
+    try 
+    {
+      console.log("searchAPI function========",number)
+      const response = await axios.get(`http://localhost:5000/gpsData?search=${number}`,{
+        // headers: {"Authorization" : `Bearer ${token}`}
+        headers: 
+        {
+            'Content-Type': 'application/json',
+            "Authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+        }
+        );
+        setData(response.data.data);
+        
+      } 
+      catch (error) 
+      {
+        console.error(error);
+      }
+  }
   useEffect(() => {
     console.log("!!!!!!!!!!!!!!!!");
     let y=1;
@@ -69,8 +91,8 @@ const PAgination = () => {
     <div className="container">
         <div class="container-fluid">
         <div class="input-group">
-          <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-          <button type="button" class="btn btn-outline-primary" onClick={() => { callApi()}}>search</button>
+          <input type="search" value={searchBar}  onChange={(e) => setsearchbar(e.target.value)}class="form-control rounded" placeholder="Search by DeviceId" aria-label="Search" aria-describedby="search-addon" id="searchBar" name="searchBar" />
+          <button type="button" class="btn btn-outline-primary" onClick={()=> searchAPi(searchBar)}>search</button>
         </div>
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="3" width="100%">
             <thead>
@@ -98,7 +120,9 @@ const PAgination = () => {
                         <td>{e.DeviceId}</td>
                         <td>{e.Device_Type}</td>
                         <td>{e.Timestamp}</td>
-                        <td>{<NavLink to="/GPS">{e.Location}</NavLink>}</td>
+                        <td>{<NavLink to="/GPS" >{e.Location}</NavLink>}</td>
+                        {/* <td>{<NavLink to={{pathname:"/GPS" , naren:e.DeviceId}} >{e.Location}</NavLink>}</td> */}
+                        {/* <td>{navigate("/GPS",{state:{charts:e.DeviceId}})}</td> */}
                         </tr>
                     </tbody>)
                 })

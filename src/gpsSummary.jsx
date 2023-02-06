@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useLocation } from 'react-router-dom'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-const GpsSummary = () => {
-
+const GpsSummary = (props) => {
+  let location = useLocation();
   const [data, setData] = useState([]);
-  console.log("calling summary")
+  console.log("calling summary",location.state?.charts);
+  
+  const [charts, setCharts] = useState(location.naren?.charts);
 
   const callApi = async()=>{
-    
     try 
     {
-        const response = await axios.get(`http://localhost:5000/pageData?page=1`,{
+      console.log("========",charts);
+        const response = await axios.get(`http://localhost:5000/searchData?search=D-1567`,{
             // headers: {"Authorization" : `Bearer ${token}`}
             headers: 
             {
@@ -60,11 +62,8 @@ const GpsSummary = () => {
     <>
     <div className="container">
         <div class="container-fluid">
-        <div class="input-group">
-          <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-          <button type="button" class="btn btn-outline-primary" onClick={() => { callApi()}}>search</button>
-        </div>
-        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="3" width="100%">
+        
+        <table id="dtBasicExample" class="table_sum table-striped table-bordered table-sm" cellspacing="3" width="100%">
             <thead>
                 <tr>
                 
@@ -82,8 +81,8 @@ const GpsSummary = () => {
                     return(
                     <tbody>
                         <tr>
-                        {/* <td>{e.DeviceId}</td>
-                        <td>{e.Device_Type}</td> */}
+                        <td>{e.DeviceId}</td>
+                        <td>{e.Device_Type}</td>
                         <td>{e.Timestamp}</td>
                         <td>{e.Location}</td>
                         </tr>
