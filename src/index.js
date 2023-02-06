@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Pagination from './data';
-
+import PAgination from './data';
+import GpsSummary1 from './gpsSummary';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,8 +13,9 @@ root.render(
   <BrowserRouter>
     
     <Routes>
-      <Route path="/data" element={<Pagination/>} />
+      <Route path="/data" element={<PAgination/>} />
       <Route path="/" element={<App />}/>
+      <Route path="/gps" element={<GpsSummary1/>} />
   </Routes>
   </BrowserRouter>
   </React.StrictMode>

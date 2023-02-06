@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-const PAgination = () => {
+const GpsSummary = () => {
 
   const [data, setData] = useState([]);
-  const [totalPage, setPage] = useState([]);
-  const [pageNum,setPageNum] = useState([]);
-  const [ currentPage , setCurrentPage ] = useState(1);
-  const [postsPerPage , setPostsPerPage] = useState(8);
+  console.log("calling summary")
 
-  const [page,setPagu] = useState(0);
-  const [limit,steLimit] = useState('');
-
-  const callApi = async(number)=>{
+  const callApi = async()=>{
     
     try 
     {
-      
-        const response = await axios.get(`http://localhost:5000/pageData?page=${number}`,{
+        const response = await axios.get(`http://localhost:5000/pageData?page=1`,{
             // headers: {"Authorization" : `Bearer ${token}`}
             headers: 
             {
@@ -33,8 +26,8 @@ const PAgination = () => {
         console.log("sandeep",arr);
         console.log("response.data.pageNum",Math.ceil(response.data.totalPages));
         setData(response.data.data);
-        setPage(response.data.totalData);
-        setPageNum(Math.ceil(response.data.totalPages));
+        // setPage(response.data.totalData);
+        // setPageNum(Math.ceil(response.data.totalPages));
         arr.map((e)=>{
             console.log("Only one",e.DeviceId)
             console.log("Only one",e.Device_Type)
@@ -51,19 +44,18 @@ const PAgination = () => {
 
   useEffect(() => {
     console.log("!!!!!!!!!!!!!!!!");
-    let y=1;
-    callApi(y);
+    callApi();
     console.log("Narendra")
   }, []);
 
 
-  const lastPostIndex = currentPage * postsPerPage;
-  const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentPosts = data.slice(firstPostIndex,lastPostIndex);
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalPage / 7); i++) {
-    pageNumbers.push(i);
-  }
+  // const lastPostIndex = currentPage * postsPerPage;
+  // const firstPostIndex = lastPostIndex - postsPerPage;
+  // const currentPosts = data.slice(firstPostIndex,lastPostIndex);
+  // const pageNumbers = [];
+  // for (let i = 1; i <= Math.ceil(totalPage / 7); i++) {
+  //   pageNumbers.push(i);
+  // }
   return (
     <>
     <div className="container">
@@ -75,16 +67,11 @@ const PAgination = () => {
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="3" width="100%">
             <thead>
                 <tr>
-                <th class="th-sm">Name
+                
+                <th class="th-sm">TimeStamp
 
                 </th>
-                <th class="th-sm">Position
-
-                </th>
-                <th class="th-sm">Office
-
-                </th>
-                <th class="th-sm">Age
+                <th class="th-sm">Location
 
                 </th>
                 </tr>
@@ -95,28 +82,17 @@ const PAgination = () => {
                     return(
                     <tbody>
                         <tr>
-                        <td>{e.DeviceId}</td>
-                        <td>{e.Device_Type}</td>
+                        {/* <td>{e.DeviceId}</td>
+                        <td>{e.Device_Type}</td> */}
                         <td>{e.Timestamp}</td>
-                        <td>{<NavLink to="/GPS">{e.Location}</NavLink>}</td>
+                        <td>{e.Location}</td>
                         </tr>
                     </tbody>)
                 })
             }
             
-              <nav>
-              <ul className='pagination'>
-                {pageNumbers.map((number) => (
-                  
-                  <li key={number} className='page-item'>
-                    {console.log("OUR NUM++++++",number)}
-                    <button onClick={() => { setPagu(number); callApi(number)}} className='page-link'>
-                      {number}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            
+              
             
             
         </table>
@@ -126,4 +102,4 @@ const PAgination = () => {
   );
 };
 
-export default PAgination;
+export default GpsSummary;

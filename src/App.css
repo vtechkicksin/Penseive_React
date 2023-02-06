@@ -14,14 +14,16 @@
   padding: 3.5rem;
 }
 
-@media screen and (min-width: 600px) {
+/* @media screen and (min-width: 600px) {
   .auth-form-container{
     padding: 5rem;
     border: 1px solid white;
     border-radius: 10px;
     margin: 0.5rem;
   }
-}
+} */
+
+
 
 
 label{
@@ -37,13 +39,23 @@ input {
 }
 
 button{
-  border: none;
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
   cursor: pointer;
   color: #7439db;
+  position: relative;
+  margin: 20px;
+  border-radius: 10px;
 }
+
+/* button{
+  border-radius: 10px;
+  margin: 10px;
+  background-color: white;
+  padding: 20px;
+  cursor: pointer;
+  color: #7439db;
+} */
 
 .link-btn {
   background: none;
