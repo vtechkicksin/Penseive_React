@@ -120,9 +120,9 @@ const PAgination = () => {
                         <td>{e.DeviceId}</td>
                         <td>{e.Device_Type}</td>
                         <td>{e.Timestamp}</td>
-                        <td>{<NavLink to="/GPS" >{e.Location}</NavLink>}</td>
+                        <td>{<NavLink to={`/GPS/${e.DeviceId}/${e.Device_Type}`}>{e.Location}</NavLink>}</td>
                         {/* <td>{<NavLink to={{pathname:"/GPS" , naren:e.DeviceId}} >{e.Location}</NavLink>}</td> */}
-                        {/* <td>{navigate("/GPS",{state:{charts:e.DeviceId}})}</td> */}
+                        {/* <td>{navigate(`/GPS/${e.DeviceId}/${e.Device_Type}`)}</td> */}
                         </tr>
                     </tbody>)
                 })

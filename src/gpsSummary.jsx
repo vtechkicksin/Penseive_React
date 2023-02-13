@@ -2,9 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { useParams } from "react-router-dom";
+
+
+
 
 const GpsSummary = (props) => {
   let location = useLocation();
+  const { id , prop } =  useParams();
+  console.log("routeParams!!!!!!!!!!!!!!!!!!!",id,prop);
+
+
   const [data, setData] = useState([]);
   console.log("calling summary",location.state?.charts);
   
@@ -14,7 +22,7 @@ const GpsSummary = (props) => {
     try 
     {
       console.log("========",charts);
-        const response = await axios.get(`http://localhost:5000/searchData?search=D-1567`,{
+        const response = await axios.get(`http://localhost:5000/searchData?search=${id}`,{
             // headers: {"Authorization" : `Bearer ${token}`}
             headers: 
             {
@@ -60,9 +68,11 @@ const GpsSummary = (props) => {
   // }
   return (
     <>
-    <div className="container">
-        <div class="container-fluid">
-        
+    <div className="container_data">
+        <div class="container-fluid-data">
+            <h1>{e.DeviceId}
+                    <span class="suffix">{e.Device_Type}</span>
+            </h1>
         <table id="dtBasicExample" class="table_sum table-striped table-bordered table-sm" cellspacing="3" width="100%">
             <thead>
                 <tr>
@@ -81,8 +91,8 @@ const GpsSummary = (props) => {
                     return(
                     <tbody>
                         <tr>
-                        <td>{e.DeviceId}</td>
-                        <td>{e.Device_Type}</td>
+                        {/* <td>{e.DeviceId}</td>
+                        <td>{e.Device_Type}</td> */}
                         <td>{e.Timestamp}</td>
                         <td>{e.Location}</td>
                         </tr>

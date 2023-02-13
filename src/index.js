@@ -13,9 +13,9 @@ root.render(
   <BrowserRouter>
     
     <Routes>
-      <Route path="/data" element={<PAgination/>} />
-      <Route path="/" element={<App />}/>
-      <Route path="/gps" element={<GpsSummary1/>} />
+      <Route exact path="/data" element={<PAgination/>} />
+      <Route exact path="/" element={<App />}/>
+      <Route exact path="/gps/:id/:prop" element={<GpsSummary1/>} />
   </Routes>
   </BrowserRouter>
   </React.StrictMode>
