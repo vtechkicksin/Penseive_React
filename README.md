@@ -13,3 +13,6 @@ gpsSummary.jsx
 make form in "Register.jsx" and "login.jsx" pages which after submits calls the api
 
 data.jsx and gpsSummary.jsx
+
+Routes, BrouserRouter to navigate from one page to another and passing the props required
+
