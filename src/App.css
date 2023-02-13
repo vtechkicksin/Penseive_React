@@ -86,13 +86,13 @@ button{
 .container_data{
   margin: 0 auto;
   max-width: 900px;
-  background-color: red;
+  
 }
 
 
 .container-fluid-data{
   margin-top: 300px;
-  background-color: #F7944D;
+  border: 1px solid black;
 }
 
 .table_sum{

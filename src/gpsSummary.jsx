@@ -70,8 +70,8 @@ const GpsSummary = (props) => {
     <>
     <div className="container_data">
         <div class="container-fluid-data">
-            <h1>{e.DeviceId}
-                    <span class="suffix">{e.Device_Type}</span>
+            <h1>{id}
+                    <span class="suffix">({prop})</span>
             </h1>
         <table id="dtBasicExample" class="table_sum table-striped table-bordered table-sm" cellspacing="3" width="100%">
             <thead>
